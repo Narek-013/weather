@@ -46,7 +46,7 @@ const WeatherComp = () => {
            console.log(data); // Log the fetched location data
            setCity(data.city); // Assuming 'city' is a property in your data
          } catch (error) {
-           console.error("Error fetching location:", error);
+           console.log("Error fetching location:", error);
          }
        };
 
