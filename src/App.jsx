@@ -25,9 +25,9 @@ function App() {
       };
 
     
-      document.addEventListener("contextmenu",(ev) => {
-        ev.preventDefault()
-      })
+      // document.addEventListener("contextmenu",(ev) => {
+      //   ev.preventDefault()
+      // })
       document.addEventListener("keydown", handleKeyDown);
 
       return () => {
