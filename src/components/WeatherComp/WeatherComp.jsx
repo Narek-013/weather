@@ -10,7 +10,6 @@ const WeatherComp = () => {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState("");
   const [city, setCity] = useState("");
-  const [addres,setAddress] = useState("")
 
   const handlerSubmit = async (ev) => {
     ev.preventDefault();
@@ -34,26 +33,14 @@ const WeatherComp = () => {
   };
 
   useEffect(() => {
-    fetch("https://api.ipify.org")
-      .then((response) => response.text())
+    fetch("https://ipapi.co/json/")
+      .then((response) => response.json())
       .then((data) => {
-        setAddress(data)
+        setCity(data.region)
       })
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  useEffect(() => {
-    const getCity = async() => {
-      fetch(`http://ip-api.com/json/${addres}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCity(data.regionName);
-        })
-        .catch((error) => console.error("Error:", error));
-    }
-    getCity()
-  },[])
-  
   useEffect(() => {
     const get = async () => {
       if (city) {
