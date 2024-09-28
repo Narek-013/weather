@@ -35,7 +35,7 @@ const WeatherComp = () => {
   useEffect(() => {
        const fetchLocation = async () => {
          try {
-           const response = await fetch("https://main--weatherproect.netlify.app/.netlify/functions/getLocation");
+           const response = await fetch(".netlify/functions/getLocation");
 
            // Check if the response is OK (status code 200-299)
            if (!response.ok) {

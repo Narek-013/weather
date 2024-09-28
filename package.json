@@ -22,6 +22,7 @@
     "eject": "react-scripts eject",
     "server": "json-server --watch src/server/DB.json -p 3005"
   },
+   "proxy":"https://main--weatherproect.netlify.app/",
   "eslintConfig": {
     "extends": [
       "react-app",
