@@ -34,7 +34,7 @@ const WeatherComp = () => {
   };
 
   useEffect(() => {
-    fetch("http://api.ipify.org")
+    fetch("https://api.ipify.org")
       .then((response) => response.text())
       .then((data) => {
         setAddress(data)
@@ -53,6 +53,7 @@ const WeatherComp = () => {
     }
     getCity()
   },[])
+  
   useEffect(() => {
     const get = async () => {
       if (city) {
