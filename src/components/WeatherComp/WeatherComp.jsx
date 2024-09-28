@@ -10,6 +10,7 @@ const WeatherComp = () => {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState("");
   const [city, setCity] = useState("");
+  const [addres,setAddress] = useState("")
 
   const handlerSubmit = async (ev) => {
     ev.preventDefault();
@@ -33,26 +34,25 @@ const WeatherComp = () => {
   };
 
   useEffect(() => {
-       const fetchLocation = async () => {
-         try {
-           const response = await fetch(".netlify/functions/getLocation");
-
-           // Check if the response is OK (status code 200-299)
-           if (!response.ok) {
-             throw new Error(`HTTP error! status: ${response.status}`);
-           }
-
-           const data = await response.json();
-           console.log(data); // Log the fetched location data
-           setCity(data.city); // Assuming 'city' is a property in your data
-         } catch (error) {
-           console.log("Error fetching location:", error);
-         }
-       };
-
-       fetchLocation();
+    fetch("http://api.ipify.org")
+      .then((response) => response.text())
+      .then((data) => {
+        setAddress(data)
+      })
+      .catch((error) => console.error("Error:", error));
   }, []);
 
+  useEffect(() => {
+    const getCity = async() => {
+      fetch(`http://ip-api.com/json/${addres}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setCity(data.regionName);
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+    getCity()
+  },[])
   useEffect(() => {
     const get = async () => {
       if (city) {
