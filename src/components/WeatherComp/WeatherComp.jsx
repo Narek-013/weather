@@ -33,12 +33,24 @@ const WeatherComp = () => {
   };
 
   useEffect(() => {
-    fetch("https://ip-api.com/json/")
-      .then((response) => response.json())
-      .then((data) => {
-        setCity(data.regionName);
-      })
-      .catch((error) => console.error("Error:", error));
+       const fetchLocation = async () => {
+         try {
+           const response = await fetch("/.netlify/functions/getLocation");
+
+           // Check if the response is OK (status code 200-299)
+           if (!response.ok) {
+             throw new Error(`HTTP error! status: ${response.status}`);
+           }
+
+           const data = await response.json();
+           console.log(data); // Log the fetched location data
+           setCity(data.city); // Assuming 'city' is a property in your data
+         } catch (error) {
+           console.error("Error fetching location:", error);
+         }
+       };
+
+       fetchLocation();
   }, []);
 
   useEffect(() => {
